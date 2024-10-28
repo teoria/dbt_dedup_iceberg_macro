@@ -1,7 +1,8 @@
 {{ config(
     enabled = true, 
     pre_hook="set session query_max_run_time='10m'",
-     materialized='table',
+     materialized='incremental',
+     method='insert',
     table_type='iceberg',
     properties= {
       "format": "'PARQUET'",
