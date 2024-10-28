@@ -13,6 +13,8 @@ See all avaliable commands
 ```
 make
 ```
+
+![image info](./doc/make.png)
  
 
 Install dependencies
