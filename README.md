@@ -5,7 +5,40 @@
 This repo contains a dbt macro for deduplicating iceberg tables and a docker development environment. 
  
 
-## Setup
+## dbt macro usage
+
+### deduplicate_iceberg
+Remove duplicated rows from a iceberg table and return a new table.
+
+#### Args:
+ - table_name(required): dbt table reference that contains duplicated rows.
+ - key_columns(required): list of columns used to find duplicates.
+ - sort_column(optional, default=None): sort column.
+ 
+#### Usage:
+Create a model file and use the macro 
+
+``` deduplicate_iceberg(table_name, key_columns, sort_column = None) ```
+
+```
+
+with import_cte as(
+    select 
+        *
+    from
+        {{ deduplicate_iceberg(  
+            ref('tab'),   -- source table reference
+            ['user_id','my_date'],  -- key columns  
+            'my_date'     -- sort column (optional)
+            )
+        }}
+)
+
+select * from import_cte
+```
+
+
+## Setup this repo
 ### Docker Enviroment Usage
 
 See all avaliable commands
@@ -101,38 +134,6 @@ CREATE TABLE hive.default.taxi_table(
 ```
 
 ![image info](./doc/table1.png)
-
-## dbt macro usage
-
-### deduplicate_iceberg
-Remove duplicated rows from a iceberg table and return a new table.
-
-#### Args:
- - table_name(required): dbt table reference that contains duplicated rows.
- - key_columns(required): list of columns used to find duplicates.
- - sort_column(optional, default=None): sort column.
- 
-#### Usage:
-Create a model file and use the macro 
-
-``` deduplicate_iceberg(table_name, key_columns, sort_column = None) ```
-
-```
-
-with import_cte as(
-    select 
-        *
-    from
-        {{ deduplicate_iceberg(  
-            ref('tab'),   -- source table reference
-            ['user_id','my_date'],  -- key columns  
-            'my_date'     -- sort column (optional)
-            )
-        }}
-)
-
-select * from import_cte
-```
 
 
 ### Run this ropo
