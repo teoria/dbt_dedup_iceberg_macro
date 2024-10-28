@@ -1,0 +1,15 @@
+# example profiles.yml file
+tiki:
+  target: trino 
+  outputs:
+    trino:
+      type: trino
+      method: none
+      user: admin
+      password:
+      database: iceberg
+      schema: tiki
+      host: localhost
+      port: 8080
+      http_scheme: http
+      threads: 1
