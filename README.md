@@ -136,7 +136,7 @@ CREATE TABLE hive.default.taxi_table(
 ![image info](./doc/table1.png)
 
 
-### Run this ropo
+### Run this repo
 ```
 dbt run 
 ```
