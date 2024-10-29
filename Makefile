@@ -7,7 +7,7 @@ ps: ## Show containers status
 
 install_dependencies: ## Install all project dependencies
 	@make create_env
-	@make pip_install
+	@make pip_install 
  
 create_env:  
 	python3 -m venv venv_dbt
@@ -21,6 +21,8 @@ start: ## Start Services
 
 stop: ## Stop Services
 	docker compose -f devops/docker-compose.yaml down  
+create_sample_table: ## Create sample table
+	python3 devops/create_table.py  
 debug:
 	dbt debug --profiles-dir .dbt
 clean:

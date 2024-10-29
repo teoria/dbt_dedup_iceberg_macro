@@ -133,6 +133,10 @@ CREATE TABLE hive.default.taxi_table(
 
 ```
 
+```
+make create_sample_table
+```
+
 ![image info](./doc/table1.png)
 
 
